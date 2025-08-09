@@ -62,10 +62,10 @@ Powered by **Unity WebGL**
 
 ### Audio
 **BGM**  
-- *Seaside Village* by Leonardo Paz  
+- [*Seaside Village* by Leonardo Paz](https://opengameart.org/content/ocean-music-pack)  
 
 **SFX**  
-- Wind Ambience by Luke.RUSTLTD  
-- WindShort SFX by remaxim  
-- Light Switch SFX by Nicole Marie T  
-- Beach Ocean Waves by jasinski  
+- [Wind Ambience by Luke.RUSTLTD](https://opengameart.org/content/wind1)  
+- [WindShort SFX by remaxim](https://opengameart.org/content/short-wind-sound)  
+- [Light Switch SFX by Nicole Marie T](https://opengameart.org/content/light-switch-on-sfx-sound-effect)  
+- [Beach Ocean Waves by jasinski](https://opengameart.org/content/beach-ocean-waves)  
