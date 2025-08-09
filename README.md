@@ -3,7 +3,10 @@
 A simple yet interactive **Unity WebGL** project that simulates a wind turbine’s behavior based on wind speed and rotor size.  
 Adjust parameters in real-time, watch the blades spin, and explore how wind energy works!
 
-🎮 **[▶ Play the Demo](https://play.unity.com/en/games/96df6571-3ab6-4187-8fdf-420b83525431/wind-turbine-simulation)**
+## 🎮 Play the Demo
+
+- **[▶ Play on Unity Play](https://play.unity.com/en/games/96df6571-3ab6-4187-8fdf-420b83525431/wind-turbine-simulation)**
+- **[▶ Play on GitHub Pages](https://rakharamadhana.github.io/WindTurbine/)**
 
 ---
 
