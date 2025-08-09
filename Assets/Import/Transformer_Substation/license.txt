@@ -1,0 +1,11 @@
+Model Information:
+* title:	Transformer Substation
+* source:	https://sketchfab.com/3d-models/transformer-substation-97a1e95d25f2472c809b0f3a7be8d267
+* author:	nyanwake (https://sketchfab.com/nyanwake)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Transformer Substation" (https://sketchfab.com/3d-models/transformer-substation-97a1e95d25f2472c809b0f3a7be8d267) by nyanwake (https://sketchfab.com/nyanwake) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

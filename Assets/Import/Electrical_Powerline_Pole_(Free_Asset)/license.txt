@@ -1,0 +1,11 @@
+Model Information:
+* title:	Electrical Powerline Pole (Free Asset)
+* source:	https://sketchfab.com/3d-models/electrical-powerline-pole-free-asset-001a960897dd46c9a6a439e5fb1167f8
+* author:	tiedtke (https://sketchfab.com/tiedtke)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Electrical Powerline Pole (Free Asset)" (https://sketchfab.com/3d-models/electrical-powerline-pole-free-asset-001a960897dd46c9a6a439e5fb1167f8) by tiedtke (https://sketchfab.com/tiedtke) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
