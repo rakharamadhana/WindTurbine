@@ -81,7 +81,6 @@ public class DragToWorld : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         }
     }
 
-
     public void OnEndDrag(PointerEventData eventData)
     {
         if (dragPreview)
@@ -126,6 +125,9 @@ public class DragToWorld : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
                     Collider2D dragCol = dragPreview.GetComponent<Collider2D>();
                     if (dragCol != null) dragCol.enabled = true;
+
+                    // ✅ Register for Undo
+                    PlacementHistory.Register(slot, dragPreview);                    
 
                     dragPreview = null;
                     return;

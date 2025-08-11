@@ -136,6 +136,26 @@ public class PlacementSlot : MonoBehaviour
         ClearHoverFeedback();
     }
 
+    public void Unplace()
+    {
+        if (placedObject)
+        {
+            Destroy(placedObject);
+            placedObject = null;
+        }
+        isOccupied = false;
+
+        // Show placeholder again
+        if (hoverTextObject) hoverTextObject.SetActive(true);
+
+        // Restore empty hover visuals
+        if (hoverSquareRenderer)
+        {
+            hoverSquareRenderer.enabled = true;
+            hoverSquareRenderer.color = defaultColor;
+        }
+    }
+
     public void ClearSlot()
     {
         if (currentPlacedObject != null)

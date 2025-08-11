@@ -60,12 +60,17 @@ namespace NotSlot.HandPainted2D
     [SerializeField]
     private float right = 0;
 
-    #endregion
+        [SerializeField] private bool lockCamera = true;        // keep camera fixed at assigned transform
+        [SerializeField] private bool allowScrollZoom = false;  // optional: allow scroll to change orthographic size
+        [SerializeField] private float zoomSpeed = 5f;
+        [SerializeField] private Vector2 orthoSizeRange = new Vector2(3f, 20f);
+
+        #endregion
 
 
-    #region Fields
+        #region Fields
 
-    private readonly State _targetState = new State();
+        private readonly State _targetState = new State();
 
     private readonly State _interpolatingState = new State();
         
@@ -197,7 +202,7 @@ namespace NotSlot.HandPainted2D
 
         private void Update()
         {
-            // Exit Sample
+            // Exit on Esc (keep if you still want it)
             if (IsEscapePressed)
             {
                 Application.Quit();
@@ -206,68 +211,42 @@ namespace NotSlot.HandPainted2D
 #endif
             }
 
-            // Edge-based mouse movement
-            Vector2 screenPos = Input.mousePosition;
-            float screenWidth = Mathf.Max(1f, Screen.width);
-            float screenHeight = Mathf.Max(1f, Screen.height);
-
-            // Normalize to (-1, 1) from center
-            Vector2 normPos = new Vector2(
-                (screenPos.x / screenWidth - 0.5f) * 2f,
-                (screenPos.y / screenHeight - 0.5f) * 2f
-            );
-
-            normPos = Vector2.ClampMagnitude(normPos, 1f);
-
-            // Dead zone to avoid camera shaking at center
-            float deadZone = 0.1f;
-            if (Mathf.Abs(normPos.x) < deadZone) normPos.x = 0;
-            if (Mathf.Abs(normPos.y) < deadZone) normPos.y = 0;
-
-            // Movement direction (horizontal and vertical only)
-            Vector3 desiredDirection = new Vector3(normPos.x, normPos.y, 0f).normalized;
-
-            // Smoothly interpolate velocity to desired direction
-            float smoothTime = 0.15f; // lower = faster response, higher = smoother
-            _smoothedVelocity = Vector3.Lerp(_smoothedVelocity, desiredDirection, Time.deltaTime / smoothTime);
-
-            // Optional boost via scroll wheel
-            boost = Mathf.Clamp(boost + BoostFactor, -3f, 8f); // adjust range as needed
-            float moveSpeed = Mathf.Pow(2.0f, boost);
-
-
-            // Apply movement
-            Vector3 movement = _smoothedVelocity * Time.deltaTime * moveSpeed;
-
-            if (!float.IsNaN(movement.x) && !float.IsNaN(movement.y) && !float.IsNaN(movement.z))
+            // ✅ Keep the camera exactly where it was placed in the scene
+            if (lockCamera)
             {
-                _targetState.Translate(movement);
+                // Optional orthographic zoom with scroll
+                if (allowScrollZoom)
+                {
+                    var cam = GetComponent<Camera>();
+                    if (cam != null && cam.orthographic)
+                    {
+#if ENABLE_INPUT_SYSTEM && WITH_NEW_INPUT
+                float scroll = _boostFactorAction.ReadValue<Vector2>().y; // same source you used for BoostFactor
+#else
+                        float scroll = Input.mouseScrollDelta.y;
+#endif
+                        if (Mathf.Abs(scroll) > 0f)
+                        {
+                            cam.orthographicSize = Mathf.Clamp(
+                                cam.orthographicSize - scroll * zoomSpeed * Time.deltaTime,
+                                orthoSizeRange.x, orthoSizeRange.y
+                            );
+                        }
+                    }
+                }
+
+                // Ensure no drift from lingering states
+                _targetState.SetFromTransform(transform);
+                _interpolatingState.SetFromTransform(transform);
+                _smoothedVelocity = Vector3.zero;
+                return; // 🔒 Stop here: no movement/interpolation below runs
             }
-            else
-            {
-                Debug.LogWarning("⚠️ Skipped movement due to NaN: " + movement);
-            }
-
-            // Clamp to bounds
-            if (limitToBounds)
-                _targetState.LimitToBounds(top, left, right, bottom);
-
-            // Interpolation
-            float positionLerpPct = 1f -
-                Mathf.Exp((Mathf.Log(1f - 0.99f) / positionLerpTime) * Time.deltaTime);
-            float rotationLerpPct = 1f -
-                Mathf.Exp((Mathf.Log(1f - 0.99f) / rotationLerpTime) * Time.deltaTime);
-
-            _interpolatingState.LerpTowards(_targetState, positionLerpPct, rotationLerpPct);
-            _interpolatingState.UpdateTransform(transform);
         }
-
-
 
         #endregion
 
 
-        #region Methods
+            #region Methods
 
         private Vector3 GetInputTranslationDirection ()
     {

@@ -53,7 +53,7 @@ public class BottomPanelController : MonoBehaviour
     {
         if (buttonLabel != null)
         {
-            buttonLabel.text = isVisible ? "Close Inventory" : "Open Inventory";
+            buttonLabel.text = isVisible ? "Tutup Daftar Barang" : "Buka Daftar Barang";
         }
     }
 
